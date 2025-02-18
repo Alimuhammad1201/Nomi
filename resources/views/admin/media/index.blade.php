@@ -1,6 +1,6 @@
 @extends('../layouts/app')
 @section('title')
-  Category List
+  Media List
 @endsection
 @section('content')
 @if(session('error'))
@@ -15,27 +15,29 @@
             <div class="col-lg-12 col-md-6 col-sm-6 col-xs-12">
                 <div class="sparkline12-list mg-t-30 responsive-mg-b-0">
                     <div class="sparkline10-hd">
-                        <h2 style="color: white; margin-bottom:  50px;">Manage Category List</h2>
+                        <h2 style="color: white; margin-bottom:  50px;">Manage Media List</h2>
                     </div>
                     <div class="sparkline10-graph table-responsive" style="height: 100vh; overflow-y: auto;">
                         <table class="table table-bordered" style="background-color: #152036 !important;">
                             <thead>
                                 <tr>
                                     <th >S.no</th>
-                                    <th >Category Name</th>
+                                    <th >Media Type</th>
+                                    <th >Title</th>
                                     <th >Slug</th>
                                     <th >Description</th>
-                                    <th >Category Image</th>
+                                    <th >Media Image</th>
                                     <th >Status</th>
                                     <th >Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse(collect($category) as $row)
+                                @forelse(collect($media) as $row)
                                 <tr>
                                     <td>{{ $loop->iteration}}</td>
-                                    <td>{{ $row->name }}</td>
-                                    <td>{{ $row->slug }}</td>
+                                    <td>{{ $row->media_type }}</td>
+                                    <td>{{ $row->media_title }}</td>
+                                    <td>{{ $row->media_slug }}</td>
                                     <td>{{ $row->description }}</td>
                                     <td>
                                         @if ($row->img)
@@ -51,16 +53,16 @@
                                         </button>
                                     </td>
                                     <td>
-                                        <a href="{{ route('category.edit', $row->id) }}" class="btn btn-info btn-sm">Edit</a>
-                                        <form action="{{ route('category.destroy', $row->id) }}" method="POST" style="display:inline;">
+                                        <a href="{{ route('media.edit', $row->id) }}" class="btn btn-info btn-sm">Edit</a>
+                                        <form action="{{ route('media.destroy', $row->id) }}" method="POST" style="display:inline;">
                                             @csrf @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Delete this category?')">Delete</button>
+                                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Delete this Media?')">Delete</button>
                                         </form>
                                     </td>
                                 </tr>
                                 @empty
                                 <tr>
-                                    <td colspan="7" class="text-center">No Record Found</td>
+                                    <td colspan="8" class="text-center">No Record Found</td>
                                 </tr>
                                 @endforelse
                             </tbody>
@@ -90,12 +92,12 @@
     document.addEventListener("DOMContentLoaded", function () {
         document.querySelectorAll(".status-btn").forEach(button => {
             button.addEventListener("click", function () {
-                let categoryId = this.getAttribute("data-id");
+                let MediaId = this.getAttribute("data-id");
                 let currentStatus = this.getAttribute("data-status");
 
                 let newStatus = currentStatus === "active" ? "deactive" : "active";
 
-                fetch(`/admin/category/update-status/${categoryId}`, {
+                fetch(`/admin/media/update-status/${MediaId}`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",

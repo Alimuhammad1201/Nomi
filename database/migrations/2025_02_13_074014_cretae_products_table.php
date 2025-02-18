@@ -13,10 +13,13 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
+            $table->varchar('code');
             $table->string('name');
+            $table->string('slug');
             $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
             $table->text('description')->nullable();
-            $table->decimal('base_price', 10, 2);
+            $table->decimal('slae_price', 10, 2);
+            $table->decimal('reguler_price', 10, 2);
             $table->integer('stock_quantity');
             $table->string('image')->nullable();
             $table->enum('status', ['active', 'inactive'])->default('active');
@@ -29,3 +32,5 @@ return new class extends Migration
         Schema::dropIfExists('products');
     }
 };
+
+

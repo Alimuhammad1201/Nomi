@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class DealsController extends Controller
 {
+    public function index()
+    {
+        return view('admin.deals.index');
+    }
+
     public function create()
     {
         return view('admin.deals.create');

@@ -1,6 +1,6 @@
 @extends('../layouts/app')
 @section('title')
-  Category Edit
+  Media Edit
 @endsection
 @section('content')
 <div class="all-content-wrapper">
@@ -13,39 +13,53 @@
 
                     </div>
                     <div class="sparkline10-graph">
-                        <form action="{{ route('category.update', $category->id) }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('media.update', $media->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
 
                             <div class="form-group">
-                                <label style="color: white" for="name">Category Name</label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ $category->name }}" placeholder="Category Name">
+                                <label class="text-white">Media Type</label>
+                                <select class="form-control @error('media_type') is-invalid @enderror" id="type" name="media_type"> 
+                                    <option value="">Select Type</option>
+                                    <option value="Slider" {{ old('media_type', $media->media_type) == 'Slider' ? 'selected' : '' }}>Slider</option>
+                                    <option value="Gallery" {{ old('media_type', $media->media_type) == 'Gallery' ? 'selected' : '' }}>Gallery</option>
+                                    <option value="Banner" {{ old('media_type', $media->media_type) == 'Banner' ? 'selected' : '' }}>Banner</option>
+                                </select>
+                                
+                                @error('media_type')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label style="color: white" for="name">Media Name</label>
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ $media->media_title }}" placeholder="media Name">
                                 @error('name')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
 
                             <div class="form-group">
-                                <label style="color: white" for="slug">Category Slug</label>
-                                <input type="text" class="form-control" id="slug" name="slug" value="{{ $category->slug }}" placeholder="slug" readonly>
+                                <label style="color: white" for="slug">Media Slug</label>
+                                <input type="text" class="form-control" id="slug" name="slug" value="{{ $media->media_slug }}" placeholder="slug" readonly>
                             </div>
 
                             <div class="form-group">
                                 <label style="color: white" for="description">Description</label>
-                                <textarea class="form-control" id="description" name="description" placeholder="Enter Description...">{{ $category->description }}</textarea>
+                                <textarea class="form-control" id="description" name="description" placeholder="Enter Description...">{{ $media->description }}</textarea>
                             </div>
 
 
                             <div class="form-group">
-                                <label style="color: white" for="img">Category Image</label>
+                                <label style="color: white" for="img">Media Image</label>
                                 <input type="file" name="img" class="form-control">
-                                <img src="{{ asset('storage/' . $category->img) }}" width="100" class="mt-2">
+                                <img src="{{ asset('storage/' . $media->img) }}" width="100" class="mt-2">
                                 @error('img')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
 
-                            <button class="btn btn-primary btn-block">Update Category</button>
+                            <button class="btn btn-primary btn-block">Update Media</button>
                         </form>
 
                     </div>

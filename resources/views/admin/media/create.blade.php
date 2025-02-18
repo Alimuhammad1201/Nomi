@@ -1,6 +1,6 @@
 @extends('../layouts/app')
 @section('title')
-  Category Create
+  Media Create
 @endsection
 @section('content')
 <div class="all-content-wrapper">
@@ -13,18 +13,33 @@
 
                     </div>
                     <div class="sparkline10-graph">
-                        <form action="{{ route('category.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('media.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
+
+                             <div class="form-group">
+                                <label class="text-white">Media Type</label>
+                                <select class="form-control @error('name') is-invalid @enderror" id="type" name="type">
+                                    <option>Select Type</option>
+                                    <option>Slider</option>
+                                    <option>Gallery </option>
+                                    <option>Banner</option>
+                                </select>
+                                
+                                @error('type')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
                             <div class="form-group">
-                                <label class="text-white">Category Name</label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Enter Category Name" value="{{ old('name') }}">
+                                <label class="text-white">Media Title</label>
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Enter Media Name" value="{{ old('name') }}">
                                 @error('name')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
 
                             <div class="form-group">
-                                <label class="text-white">Category Slug</label>
+                                <label class="text-white">Media Slug</label>
                                 <input type="text" class="form-control" id="slug" name="slug" placeholder="Auto Generated" readonly value="{{ old('slug') }}">
                             </div>
 
@@ -37,25 +52,14 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="text-white">Status</label>
-                                <select class="form-control @error('status') is-invalid @enderror" name="status">
-                                    <option value="active" {{ old('status') == 'active' ? 'selected' : '' }}>Active</option>
-                                    <option value="deactive" {{ old('status') == 'deactive' ? 'selected' : '' }}>Deactive</option>
-                                </select>
-                                @error('status')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-
-                            <div class="form-group">
-                                <label class="text-white">Category Image</label>
+                                <label class="text-white">media Image</label>
                                 <input type="file" class="form-control @error('img') is-invalid @enderror" name="img">
                                 @error('img')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
 
-                            <button type="submit" class="btn btn-primary">Save Category</button>
+                            <button type="submit" class="btn btn-primary">Save media</button>
                         </form>
 
                     </div>

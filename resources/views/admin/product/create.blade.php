@@ -12,74 +12,107 @@
                     <div class="sparkline10-hd">
 
                     </div>
-                    <div class="sparkline10-graph">
-                        <form>
+                    <div class="sparkline10-graph"  style="height: 100vh;">
+                        <form method="POST" action="{{ route('product.store')}}" name="ProductAdd" id="ProductAdd" enctype="multipart/form-data">
+                            @csrf
                         <div id="pwd-container3">
 
                             <div class="form-group">
-                                <label style="color: white" for="code">Product Code</label>
-                                <input type="text" class="form-control" id="code" name="code" value="" placeholder="">
+                                <label style="color: white" for="product_code">Product Code</label>
+                                <input type="text" class="form-control @error('product_code') is-invalid @enderror" id="product_code" name="product_code" value="{{ $productCode }}" readonly>
+                                @error('product_code')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
+
                             <div class="form-group">
                                 <label style="color: white" for="name">Product Name</label>
-                                <input type="text" class="form-control" id="name" name="name" placeholder="Product Name">
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Product Name" value="{{ old('name') }}">
+                                @error('name')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="form-group">
                                 <label style="color: white" for="slug">Product Slug</label>
-                                <input type="text" class="form-control example3" id="slug" name="slug" placeholder="slug" readonly >
+                                <input type="text" class="form-control @error('slug') is-invalid @enderror" id="slug" name="slug" placeholder="slug" readonly value="{{ old('slug') }}">
+                                @error('slug')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="form-group">
-                                <label style="color: white" for="slug">Select Category</label>
-                                <select name="category_id" class="form-control example3" id="">
+                                <label style="color: white" for="category_id">Select Category</label>
+                                <select name="category_id" class="form-control @error('category_id') is-invalid @enderror">
                                     <option>Select Category</option>
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-
+                                    @foreach ($category as $row)
+                                        <option value="{{ $row->id }}" {{ old('category_id') == $row->id ? 'selected' : '' }}>{{ $row->name }}</option>
+                                    @endforeach
                                 </select>
+                                @error('category_id')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="form-group">
-                                <label style="color: white" for="Regulier Price">Product Regulier Price</label>
-                                <input type="text" class="form-control example3" id="Regulier Price" name="Regulier Price" placeholder="Regulier Price" readonly >
+                                <label style="color: white" for="regular_price">Product Regular Price</label>
+                                <input type="text" class="form-control @error('regular_price') is-invalid @enderror" id="regular_price" name="regular_price" placeholder="Regular Price" value="{{ old('regular_price') }}">
+                                @error('regular_price')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="form-group">
-                                <label style="color: white" for="Sele Price">Product Sele Price</label>
-                                <input type="text" class="form-control example3" id="Sele Price" name="Sele Price" placeholder="Sele Price" readonly >
+                                <label style="color: white" for="sale_price">Product Sale Price</label>
+                                <input type="text" class="form-control @error('sale_price') is-invalid @enderror" id="sale_price" name="sale_price" placeholder="Sale Price" value="{{ old('sale_price') }}">
+                                @error('sale_price')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="form-group">
-                                <label style="color: white" for="quantity">Product quantity</label>
-                                <input type="text" class="form-control example3" id="quantity" name="quantity" placeholder="quantity" readonly >
+                                <label style="color: white" for="quantity">Product Quantity</label>
+                                <input type="text" class="form-control @error('quantity') is-invalid @enderror" id="quantity" name="quantity" placeholder="Quantity" value="{{ old('quantity') }}">
+                                @error('quantity')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="form-group">
-                                <label style="color: white" for="slug">Select Status</label>
-                                <select name="status" class="form-control example3" id="">
+                                <label style="color: white" for="status">Select Status</label>
+                                <select name="status" class="form-control @error('status') is-invalid @enderror">
                                     <option>Select Status</option>
-                                    <option>Active</option>
-                                    <option>Deactive</option>
+                                    <option value="Active" {{ old('status') == 'Active' ? 'selected' : '' }}>Active</option>
+                                    <option value="Deactive" {{ old('status') == 'Deactive' ? 'selected' : '' }}>Deactive</option>
                                 </select>
+                                @error('status')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="form-group">
                                 <label style="color: white" for="description">Product Description</label>
-                                <textarea id="description" name="description"></textarea>
+                                <textarea id="description" name="description" class="form-control @error('description') is-invalid @enderror">{{ old('description') }}</textarea>
+                                @error('description')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
-
 
                             <div class="form-group">
                                 <label style="color: white" for="img">Product Image</label>
-                                <input type="file" name="img" class="form-control example3" id="img">
+                                <input type="file" name="img" class="form-control @error('img') is-invalid @enderror" id="img">
+                                @error('img')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="form-group">
-                                <label style="color: white" for="sub_img">Product Sub Images</label>
-                                <input type="file" name="sub_img" class="form-control example3" id="sub_img" multiple>
-                            </div>
+                                <label style="color:white" for="sub_images">Product Images</label>
+                                <input type="file" name="sub_images[]" class="form-control @error('sub_images') is-invalid @enderror" id="sub_images" multiple>
+                                @error('sub_images')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div> 
                             <div class="form-group">
                                 <button class="btn btn-primary btn-block loginbtn">Add</button>
                             </div>

@@ -7,6 +7,7 @@
     <title>@yield('title')TriA Tech Panel</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- favicon
 		============================================ -->
     <link rel="shortcut icon" type="image/x-icon" href="/backend/img/favicon.ico">
@@ -15,6 +16,8 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
     <!-- Bootstrap CSS
 		============================================ -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <link rel="stylesheet" href="/backend/css/bootstrap.min.css">
     <!-- Bootstrap CSS
 		============================================ -->
@@ -98,63 +101,59 @@
             <div class="left-custom-menu-adp-wrap comment-scrollbar">
                 <nav class="sidebar-nav left-sidebar-menu-pro">
                     <ul class="metismenu" id="menu1">
-                        <li class="">
-                            <a class="has-arrow" href="/backend/index.html">
-								   <i class="icon nalika-home icon-wrap"></i>
-								   <span class="mini-click-non">Ecommerce</span>
-								</a>
+                        <li class="{{ Request::is('admin/category*') ? 'active' : '' }}">
+                            <a class="has-arrow" href="#">
+                                <i class="icon nalika-home icon-wrap"></i>
+                                <span class="mini-click-non">Category</span>
+                            </a>
                             <ul class="submenu-angle" aria-expanded="true">
-                                <li><a title="Dashboard v.1" href="/backend/index.html"><span class="mini-sub-pro">Dashboard v.1</span></a></li>
-                                <li><a title="Dashboard v.2" href="/backend/index-1.html"><span class="mini-sub-pro">Dashboard v.2</span></a></li>
-                                <li><a title="Dashboard v.3" href="/backend/index-2.html"><span class="mini-sub-pro">Dashboard v.3</span></a></li>
-                                <li><a title="Product List" href="/backend/product-list.html"><span class="mini-sub-pro">Product List</span></a></li>
-                                <li><a title="Product Edit" href="/backend/product-edit.html"><span class="mini-sub-pro">Product Edit</span></a></li>
-                                <li><a title="Product Detail" href="/backend/product-detail.html"><span class="mini-sub-pro">Product Detail</span></a></li>
-                                <li><a title="Product Cart" href="/backend/product-cart.html"><span class="mini-sub-pro">Product Cart</span></a></li>
-                                <li><a title="Product Payment" href="/backend/product-payment.html"><span class="mini-sub-pro">Product Payment</span></a></li>
-                                <li><a title="Analytics" href="/backend/analytics.html"><span class="mini-sub-pro">Analytics</span></a></li>
-                                <li><a title="Widgets" href="/backend/widgets.html"><span class="mini-sub-pro">Widgets</span></a></li>
+                                <li><a href="{{ route('category.create') }}"><span class="mini-sub-pro">Create Category</span></a></li>
+                                <li><a href="{{ route('category') }}"><span class="mini-sub-pro">Manage Category</span></a></li>
                             </ul>
                         </li>
-                        <li class="">
-                            <a class="has-arrow" href="/backend/index.html">
-								   <i class="icon nalika-home icon-wrap"></i>
-								   <span class="mini-click-non">Category</span>
-								</a>
+
+                        <li class="{{ Request::is('admin/media*') ? 'active' : '' }}">
+                            <a class="has-arrow" href="#">
+                                <i class="icon nalika-home icon-wrap"></i>
+                                <span class="mini-click-non">Media</span>
+                            </a>
                             <ul class="submenu-angle" aria-expanded="true">
-                                <li><a title="Dashboard v.1" href="/backend/index.html"><span class="mini-sub-pro">Create Category</span></a></li>
-                                <li><a title="Dashboard v.2" href="/backend/index-1.html"><span class="mini-sub-pro">Manage Category</span></a></li>
+                                <li><a href="{{ route('media.create') }}"><span class="mini-sub-pro">Create Media</span></a></li>
+                                <li><a href="{{ route('media') }}"><span class="mini-sub-pro">Manage media</span></a></li>
                             </ul>
                         </li>
-                        <li class="">
-                            <a class="has-arrow" href="/backend/index.html">
-								   <i class="icon nalika-home icon-wrap"></i>
-								   <span class="mini-click-non">Product</span>
-								</a>
+
+                        <li class="{{ Request::is('admin/product*') ? 'active' : '' }}">
+                            <a class="has-arrow" href="#">
+                                <i class="icon nalika-home icon-wrap"></i>
+                                <span class="mini-click-non">Product</span>
+                            </a>
                             <ul class="submenu-angle" aria-expanded="true">
-                                <li><a title="Dashboard v.1" href="/backend/index.html"><span class="mini-sub-pro">Create Product</span></a></li>
-                                <li><a title="Dashboard v.2" href="/backend/index-1.html"><span class="mini-sub-pro">Manage Product</span></a></li>
-                                <li><a title="Dashboard v.2" href="/backend/index-1.html"><span class="mini-sub-pro">Product Varations</span></a></li>
+                                <li><a href="{{ route('product.create') }}"><span class="mini-sub-pro">Create Product</span></a></li>
+                                <li><a href="{{ route('product') }}"><span class="mini-sub-pro">Manage Product</span></a></li>
+                                <li><a href="{{ route('varartion.create') }}"><span class="mini-sub-pro">Product Variations</span></a></li>
                             </ul>
                         </li>
-                        <li class="">
-                            <a class="has-arrow" href="/backend/index.html">
-								   <i class="icon nalika-home icon-wrap"></i>
-								   <span class="mini-click-non">Deals</span>
-							</a>
+
+                        <li class="{{ Request::is('admin/deals*') ? 'active' : '' }}">
+                            <a class="has-arrow" href="#">
+                                <i class="icon nalika-home icon-wrap"></i>
+                                <span class="mini-click-non">Deals</span>
+                            </a>
                             <ul class="submenu-angle" aria-expanded="true">
-                                <li><a title="Dashboard v.1" href="/backend/index.html"><span class="mini-sub-pro">Create Deals</span></a></li>
-                                <li><a title="Dashboard v.2" href="/backend/index-1.html"><span class="mini-sub-pro">Manage Deals</span></a></li>
+                                <li><a href="{{ route('deals.create') }}"><span class="mini-sub-pro">Create Deals</span></a></li>
+                                <li><a href="{{ route('deals') }}"><span class="mini-sub-pro">Manage Deals</span></a></li>
                             </ul>
                         </li>
-                        <li class="">
-                            <a class="has-arrow" href="/backend/index.html">
-								   <i class="icon nalika-home icon-wrap"></i>
-								   <span class="mini-click-non">Blogs</span>
-							</a>
+
+                        <li class="{{ Request::is('admin/varation*') ? 'active' : '' }}">
+                            <a class="has-arrow" href="#">
+                                <i class="icon nalika-home icon-wrap"></i>
+                                <span class="mini-click-non">Variations</span>
+                            </a>
                             <ul class="submenu-angle" aria-expanded="true">
-                                <li><a title="Dashboard v.1" href="/backend/index.html"><span class="mini-sub-pro">Create Blogs</span></a></li>
-                                <li><a title="Dashboard v.2" href="/backend/index-1.html"><span class="mini-sub-pro">Manage Blogs</span></a></li>
+                                <li><a href="{{ route('varartion.create') }}"><span class="mini-sub-pro">Create Variation</span></a></li>
+                                <li><a href="{{ route('varartion.edit', ['id' => 1]) }}"><span class="mini-sub-pro">Edit Variation</span></a></li>
                             </ul>
                         </li>
                     </ul>
