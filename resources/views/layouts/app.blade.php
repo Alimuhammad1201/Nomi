@@ -156,6 +156,16 @@
                                 <li><a href="{{ route('varartion.edit', ['id' => 1]) }}"><span class="mini-sub-pro">Edit Variation</span></a></li>
                             </ul>
                         </li>
+
+                        <li class="{{ Request::is('admin/view/order*') ? 'active' : '' }}">
+                            <a class="has-arrow" href="#">
+                                <i class="icon nalika-home icon-wrap"></i>
+                                <span class="mini-click-non">Orders</span>
+                            </a>
+                            <ul class="submenu-angle" aria-expanded="true">
+                                <li><a href="{{ route('view.order') }}"><span class="mini-sub-pro">View Order</span></a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </nav>
             </div>

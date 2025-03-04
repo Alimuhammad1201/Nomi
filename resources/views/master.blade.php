@@ -8,25 +8,18 @@
 <meta name="author" content="vecuro">
   <meta name="description" content="Luxrio - The Fashion & Watch E-Commerce HTML5 Template">
   <meta name="keywords" content="Luxrio - The Fashion & Watch E-Commerce HTML5 Template">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <meta name="robots" content="INDEX,FOLLOW">
   <!-- Mobile Specific Metas -->
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <!-- Favicons - Place favicon.ico in the root directory -->
-  <link rel="apple-touch-icon" sizes="57x57" href="assets/img/favicons/apple-icon-57x57.png">
-  <link rel="apple-touch-icon" sizes="60x60" href="assets/img/favicons/apple-icon-60x60.png">
-  <link rel="apple-touch-icon" sizes="72x72" href="assets/img/favicons/apple-icon-72x72.png">
-  <link rel="apple-touch-icon" sizes="76x76" href="assets/img/favicons/apple-icon-76x76.png">
-  <link rel="apple-touch-icon" sizes="114x114" href="assets/img/favicons/apple-icon-114x114.png">
-  <link rel="apple-touch-icon" sizes="120x120" href="assets/img/favicons/apple-icon-120x120.png">
-  <link rel="apple-touch-icon" sizes="144x144" href="assets/img/favicons/apple-icon-144x144.png">
-  <link rel="apple-touch-icon" sizes="152x152" href="assets/img/favicons/apple-icon-152x152.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicons/apple-icon-180x180.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicons/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicons/favicon-96x96.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicons/favicon-16x16.png">
-  <link rel="manifest" href="assets/img/favicons/manifest.json">
+  
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/img/favicons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/img/favicons/manifest.json">
   <meta name="msapplication-TileColor" content="#ffffff">
-  <meta name="msapplication-TileImage" content="assets/img/favicons/ms-icon-144x144.png">
+  <meta name="msapplication-TileImage" content="/assets/img/favicons/ms-icon-144x144.png">
   <meta name="theme-color" content="#ffffff">
   <!--==============================
     Google Fonts
@@ -38,17 +31,17 @@
       All CSS File
   ============================== -->
   <!-- Bootstrap -->
-  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
   <!-- Fontawesome Icon -->
-  <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+  <link rel="stylesheet" href="/assets/css/fontawesome.min.css">
   <!-- Magnific Popup -->
-  <link rel="stylesheet" href="assets/css/magnific-popup.min.css">
+  <link rel="stylesheet" href="/assets/css/magnific-popup.min.css">
   <!-- Slick Slider -->
-  <link rel="stylesheet" href="assets/css/slick.min.css">
+  <link rel="stylesheet" href="/assets/css/slick.min.css">
   <!-- Animation CSS -->
-  <link rel="stylesheet" href="assets/css/animate.min.css">
+  <link rel="stylesheet" href="/assets/css/animate.min.css">
   <!-- Theme Custom CSS -->
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 
 <body class="vs-body">
@@ -64,7 +57,7 @@
   <div class="preloader">
     <button class="vs-btn preloaderCls">Cancel Preloader </button>
     <div class="preloader-inner">
-      <img src="assets/img/logo.svg" alt="logo">
+      <img src="/assets/img/logo.png" alt="logo">
       <span class="loader"></span>
     </div>
   </div>
@@ -74,72 +67,31 @@
   <div class="vs-menu-wrapper">
     <div class="vs-menu-area text-center">
       <div class="mobile-logo">
-        <a href="index.html"><img src="assets/img/logo.png" alt="Carmax" class="logo"></a>
+        <a href="{{ route('home') }}"><img src="/assets/img/logo.png" alt="Carmax" class="logo"></a>
         <button class="vs-menu-toggle"><i class="fal fa-times"></i></button>
       </div>
       <div class="vs-mobile-menu">
         <ul>
           <li class="menu-item-has-children">
-            <a href="index.html">Home</a>
-            <ul class="sub-menu">
-              <li><a href="index.html">Home 1</a></li>
-              <li><a href="index-2.html">Home 2</a></li>
-              <li><a href="index-3.html">Home 3</a></li>
-            </ul>
+            <a href="{{ route('home') }}">Home</a>
+          </li>
+
+           <li class="menu-item-has-children">
+            <a href="{{ route('shop')}}">Shop</a>
           </li>
           <li class="menu-item-has-children">
-            <a href="about.html">About</a>
-            <ul class="sub-menu">
-              <li><a href="about.html">About</a></li>
-              <li><a href="faq.html">Faq’s</a></li>
+            <a href="{{ route('about') }}">About</a>
+          </li>
+         <li class="menu-item-has-children">
+            <a href="#">Jewellery</a>
+            <ul>
+                @foreach ($categories as $category)
+                    <li><a href="{{ route('category_detail', $category->slug) }}">{{ $category->name }}</a></li>
+                @endforeach
             </ul>
-          </li>
-          <li class="menu-item-has-children">
-            <a href="shop-sidebar.html">watch</a>
-          </li>
+        </li>
           <li>
-            <a href="shop.html">jewellery</a>
-          </li>
-          <li class="menu-item-has-children mega-menu-wrap">
-            <a href="javascript:void(0)">Pages</a>
-            <ul class="mega-menu">
-              <li><a href="products-grid.html">Page List 1</a>
-                <ul>
-                  <li><a href="index.html">Home 1</a></li>
-                  <li><a href="index-2.html">Home 2</a></li>
-                  <li><a href="index-3.html">Home 3</a></li>
-                  <li><a href="about.html">About</a></li>
-                  <li><a href="shop-sidebar.html">watch</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Page List 2</a>
-                <ul>
-                  <li><a href="shop.html">jewellery</a></li>
-                  <li><a href="faq.html">Faq's</a></li>
-                  <li><a href="blog.html">Blog</a></li>
-                  <li><a href="blog-list.html">Blog List</a></li>
-                  <li><a href="blog-details.html">Blog Details</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Page List 3</a>
-                <ul>
-                  <li><a href="shop.html">Shop</a></li>
-                  <li><a href="shop-sidebar.html">Shop Sidebar</a></li>
-                  <li><a href="shop-details.html">Shop Details</a></li>
-                  <li><a href="cart.html">My Cart</a></li>
-                  <li><a href="checkout.html">Checkout</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Page List 4</a>
-                <ul>
-                  <li><a href="404.html">404 Error</a></li>
-                  <li><a href="contact.html">Contact Us</a></li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <a href="contact.html">Contact</a>
+            <a href="{{ route('contact') }}">Contact</a>
           </li>
         </ul>
       </div>
@@ -151,7 +103,7 @@
   <div class="sidemenu-wrapper">
     <div class="sidemenu-content">
       <div class="sidemenu-logo">
-        <a href="index.html"><img src="assets/img/logo.png" alt="Greeno" class="logo"></a>
+        <a href="{{ route('home') }}"><img src="/assets/img/logo.png" alt="Greeno" class="logo"></a>
         <button class="closeButton sideMenuCls">X</button>
       </div>
       <div class="sidemenu-body">
@@ -162,15 +114,9 @@
           <a href="mailto:info@luxrio.com" class="sidemenu-link">info@luxrio.com</a>
           <a href="#" class="sidemenu-link">munich Expresswa 70 Germany, TX 7859</a>
         </div>
-        <h4 class="sidemenu-subtitle style2">Subscribe</h4>
-        <form action="#" class="sidemenu-form">
-          <input type="text" name="email" placeholder="Get News & Updates">
-          <button type="submit" class="vs-btn">
-            <svg width="20" height="22" viewBox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M18.8883 12.657L3.01111 21.742C1.47116 22.6219 -0.336867 21.1027 0.268127 19.4355L3.31703 11.0003L0.268127 2.56498C-0.336867 0.894336 1.47116 -0.621493 3.01111 0.25845L18.8883 9.34339C20.1738 10.0756 20.1704 11.9249 18.8883 12.657Z" fill="#FF3E01" />
-            </svg>
-          </button>
-        </form>
+        <a href="{{ route('contact') }}">
+        <button class="sidemenu-subtitle style2 vs-btn">Contact Us</button>
+        </a>
         <p>Subscribe dolor sitamet, consectetur adiping eli. Duis esollici tudin augue.</p>
         <div class="footer-social">
           <span>follow us on :</span>
@@ -181,8 +127,8 @@
         </div>
       </div>
       <p class="footer-copyright style2">
-        Copyright <i class="fal fa-copyright"></i> 2024 <a href="index.html">Luxrio</a>.
-        All rights reserved by <a href="https://themeforest.net/user/vecuro_themes">Vecuro</a>.
+        Copyright <i class="fal fa-copyright"></i> 2025 <a href="{{ route('home') }}">Mr Nomi</a>.
+        All rights reserved by <a href="https://triatechsol.com/">TriA Tech Solution</a>.
       </p>
     </div>
   </div>
@@ -213,109 +159,52 @@
                 </svg>
               </button>
               <ul class="menu-list">
-                <li class="menu-item">
-                  <span class="icon">👗</span> Fashion
-                </li>
-                <li class="menu-item">
-                  <span class="icon">⌚</span> Watch
-                </li>
-                <li class="menu-item">
-                  <span class="icon">💎</span> Earrings
-                </li>
-                <li class="menu-item">
-                  <span class="icon">📿</span> Necklace
-                </li>
-                <li class="menu-item">
-                  <span class="icon">🌸</span> Accessories
-                </li>
-                <li class="menu-item">
-                  <span class="icon">💍</span> Rings
-                </li>
+                   @foreach ($categories as $category)
+                     <li class="menu-item">
+                        <a href="{{ route('category_detail', $category->slug) }}"><span class="icon"></span> {{ $category->name }}</a>
+                    </li>
+                  @endforeach
               </ul>
             </div>
           </div>
         </div>
         <div class="col-xl-auto col-md-auto col-auto">
           <nav class="main-menu d-none d-lg-block">
-            <ul>
-              <li class="menu-item-has-children">
-                <a href="index.html">Home</a>
-                <ul class="sub-menu">
-                  <li><a href="index.html">Home 1</a></li>
-                  <li><a href="index-2.html">Home 2</a></li>
-                  <li><a href="index-3.html">Home 3</a></li>
-                </ul>
-              </li>
-              <li class="menu-item-has-children">
-                <a href="about.html">About</a>
-                <ul class="sub-menu">
-                  <li><a href="about.html">About</a></li>
-                  <li><a href="faq.html">Faq’s</a></li>
-                </ul>
-              </li>
-              <li class="menu-item-has-children">
-                <a href="shop-sidebar.html">watch</a>
-              </li>
-              <li>
-                <a href="shop.html">jewellery</a>
-              </li>
-              <li class="menu-item-has-children mega-menu-wrap">
-                <a href="javascript:void(0)">Pages</a>
-                <ul class="mega-menu">
-                  <li><a href="products-grid.html">Page List 1</a>
-                    <ul>
-                      <li><a href="index.html">Home 1</a></li>
-                      <li><a href="index-2.html">Home 2</a></li>
-                      <li><a href="index-3.html">Home 3</a></li>
-                      <li><a href="about.html">About</a></li>
-                      <li><a href="shop-sidebar.html">watch</a></li>
-                    </ul>
-                  </li>
-                  <li><a href="#">Page List 2</a>
-                    <ul>
-                      <li><a href="shop.html">jewellery</a></li>
-                      <li><a href="faq.html">Faq's</a></li>
-                      <li><a href="blog.html">Blog</a></li>
-                      <li><a href="blog-list.html">Blog List</a></li>
-                      <li><a href="blog-details.html">Blog Details</a></li>
-                    </ul>
-                  </li>
-                  <li><a href="#">Page List 3</a>
-                    <ul>
-                      <li><a href="shop.html">Shop</a></li>
-                      <li><a href="shop-sidebar.html">Shop Sidebar</a></li>
-                      <li><a href="shop-details.html">Shop Details</a></li>
-                      <li><a href="cart.html">My Cart</a></li>
-                      <li><a href="checkout.html">Checkout</a></li>
-                    </ul>
-                  </li>
-                  <li><a href="#">Page List 4</a>
-                    <ul>
-                      <li><a href="404.html">404 Error</a></li>
-                      <li><a href="contact.html">Contact Us</a></li>
-                    </ul>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <a href="contact.html">Contact</a>
-              </li>
+                 <ul>
+          <li class="menu-item-has-children">
+            <a href="{{ route('home') }}">Home</a>
+          </li>
+
+           <li class="menu-item-has-children">
+            <a href="{{ route('shop') }}">Shop</a>
+          </li>
+          <li class="menu-item-has-children">
+            <a href="{{ route('about') }}">About</a>
+          </li>
+         <li class="menu-item-has-children">
+            <a href="#">Jewellery</a>
+            <ul class="sub-menu">
+                @foreach ($categories as $category)
+                    <li><a href="{{ route('category_detail', $category->slug) }}">{{ $category->name }}</a></li>
+                @endforeach
             </ul>
+        </li>
+          <li>
+            <a href="{{ route('contact') }}">Contact</a>
+          </li>
+        </ul>
           </nav>
           <button class="vs-menu-toggle d-inline-block d-lg-none"><i class="fal fa-bars"></i></button>
         </div>
         <div class="col-xl-3 col-md-auto col-auto">
           <div class="header-wc">
-            <a class="wc-link" href="cart.html">Wishlist
-              <svg width="20" height="17" viewBox="0 0 20 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M14.5815 0C13.6435 0.0141142 12.726 0.26742 11.9215 0.734338C11.1171 1.20126 10.4543 1.86525 10 2.65927C9.54572 1.86525 8.8829 1.20126 8.07847 0.734338C7.27405 0.26742 6.35651 0.0141142 5.41852 0C3.92324 0.062848 2.51444 0.695644 1.49991 1.76014C0.485388 2.82464 -0.0524034 4.2343 0.00403263 5.68117C0.00403263 9.34531 3.99076 13.3471 7.33441 16.0604C8.08096 16.6673 9.02486 17 10 17C10.9751 17 11.919 16.6673 12.6656 16.0604C16.0092 13.3471 19.996 9.34531 19.996 5.68117C20.0524 4.2343 19.5146 2.82464 18.5001 1.76014C17.4856 0.695644 16.0768 0.062848 14.5815 0ZM11.5952 14.8274C11.1487 15.1912 10.5837 15.3906 10 15.3906C9.41628 15.3906 8.85131 15.1912 8.40481 14.8274C4.12487 11.3535 1.67003 8.02052 1.67003 5.68117C1.61308 4.66155 1.97521 3.66151 2.67742 2.89917C3.37964 2.13682 4.36497 1.67401 5.41852 1.61168C6.47206 1.67401 7.45739 2.13682 8.15961 2.89917C8.86182 3.66151 9.22395 4.66155 9.167 5.68117C9.167 5.89489 9.25477 6.09985 9.41098 6.25098C9.5672 6.4021 9.77908 6.487 10 6.487C10.2209 6.487 10.4328 6.4021 10.589 6.25098C10.7452 6.09985 10.833 5.89489 10.833 5.68117C10.7761 4.66155 11.1382 3.66151 11.8404 2.89917C12.5426 2.13682 13.5279 1.67401 14.5815 1.61168C15.635 1.67401 16.6204 2.13682 17.3226 2.89917C18.0248 3.66151 18.3869 4.66155 18.33 5.68117C18.33 8.02052 15.8751 11.3535 11.5952 14.8242V14.8274Z" fill="currentColor" />
-              </svg>
-            </a>
-            <a class="wc-link" href="cart.html">bag 0
-              <svg width="18" height="20" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M5.33315 6.33334V3.12501C5.33315 1.75001 6.24982 0.833344 7.62482 0.833344H10.3748C11.7498 0.833344 12.6665 1.75001 12.6665 3.12501V6.33334M16.709 14.6108H5.33315M5.70002 4.95834H12.3C15.4167 4.95834 15.7284 6.41584 15.9392 8.19418L16.7642 15.0692C17.03 17.3242 16.3334 19.1667 13.125 19.1667H4.88419C1.66669 19.1667 0.970022 17.3242 1.24502 15.0692L2.07003 8.19418C2.2717 6.41584 2.58336 4.95834 5.70002 4.95834Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-              </svg>
-            </a>
+        
+           <a class="wc-link" href="{{ route('cart.index') }}">
+    bag <span id="cart-count">{{ array_sum(array_column(session('cart', []), 'quantity')) }}</span>
+    <svg width="18" height="20" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M5.33315 6.33334V3.12501C5.33315 1.75001 6.24982 0.833344 7.62482 0.833344H10.3748C11.7498 0.833344 12.6665 1.75001 12.6665 3.12501V6.33334M16.709 14.6108H5.33315M5.70002 4.95834H12.3C15.4167 4.95834 15.7284 6.41584 15.9392 8.19418L16.7642 15.0692C17.03 17.3242 16.3334 19.1667 13.125 19.1667H4.88419C1.66669 19.1667 0.970022 17.3242 1.24502 15.0692L2.07003 8.19418C2.2717 6.41584 2.58336 4.95834 5.70002 4.95834Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+</a>
           </div>
         </div>
       </div>
@@ -325,8 +214,8 @@
       Popup Subscription
     ============================== -->
   <div id="popup" class="popup-overlay d-none">
-    <div class="popup-content" data-bg-src="assets/img/popup/popup-bg.png">
-      <img src="assets/img/popup/img-1-1.jpg" alt="popup" class="popup-img">
+    <div class="popup-content" data-bg-src="/assets/img/popup/popup-bg.png">
+      <img src="/assets/img/popup/img-1-1.jpg" alt="popup" class="popup-img">
       <div class="popup-form">
         <span class="close-btn" id="close-popup">X</span>
         <h3 class="popup-title"><span>subscribe</span> to get access</h3>
@@ -356,16 +245,44 @@
             </div>
             <div class="col-md-4 text-center">
               <div class="header-logo">
-                <a href="index.html"><img src="assets/img/logo.png" width="150" alt="Luxrio" class="logo"></a>
+                <a href="{{ route('home') }}"><img src="/assets/img/logo.png" width="150" alt="Luxrio" class="logo"></a>
               </div>
             </div>
-            <div class="col-md-4 text-end d-none d-md-block">
-              <button class="sideMenuToggler">
-                <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M0 10V0H10.5L15 5L20 0H29.5V10L25.5 15L29.5 19.5V30H20L15 25.5L10.5 30H0V19.5L5 15L0 10Z" fill="#EEE7D5" />
-                </svg>
-              </button>
-            </div>
+       <div class="col-md-4 d-flex justify-content-end align-items-center">
+  <!--   <select id="currency-dropdown" class="form-select shadow-sm me-3 text-white fw-bold">
+    <option value="PKR" selected>PKR</option>
+    <option value="USD">USD</option>
+    <option value="EUR">EUR</option>
+</select> -->
+
+    <button class="sideMenuToggler btn btn-outline-light">
+        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 10V0H10.5L15 5L20 0H29.5V10L25.5 15L29.5 19.5V30H20L15 25.5L10.5 30H0V19.5L5 15L0 10Z" fill="#EEE7D5"/>
+        </svg>
+    </button>
+</div>
+
+<style>
+    .sideMenuToggler {
+        background: #333;
+        border: 2px solid #EEE7D5;
+        border-radius: 8px;
+        padding: 5px 10px;
+        transition: all 0.3s ease-in-out;
+    }
+    .sideMenuToggler:hover {
+        background: #555;
+        transform: scale(1.1);
+    }
+    #currency-dropdown {
+        width: 120px;
+        border-radius: 8px;
+    }
+</style>
+
+
+
+
           </div>
         </div>
       </div>
@@ -385,109 +302,57 @@
                       </svg>
                     </button>
                     <ul class="menu-list">
-                      <li class="menu-item">
-                        <span class="icon">👗</span> Fashion
-                      </li>
-                      <li class="menu-item">
-                        <span class="icon">⌚</span> Watch
-                      </li>
-                      <li class="menu-item">
-                        <span class="icon">💎</span> Earrings
-                      </li>
-                      <li class="menu-item">
-                        <span class="icon">📿</span> Necklace
-                      </li>
-                      <li class="menu-item">
-                        <span class="icon">🌸</span> Accessories
-                      </li>
-                      <li class="menu-item">
-                        <span class="icon">💍</span> Rings
-                      </li>
+                     @foreach ($categories as $category)
+                     <li class="menu-item">
+                        <a href="{{ route('category_detail', $category->slug) }}" style="color: black;"><span class="" ></span> {{ $category->name }}</a>
+                    </li>
+                  @endforeach
+                     
                     </ul>
                   </div>
                 </div>
               </div>
               <div class="col-xl-auto col-md-auto col-auto">
                 <nav class="main-menu d-none d-lg-block">
-                  <ul>
-                    <li class="menu-item-has-children">
-                      <a href="index.html">Home</a>
-                      <ul class="sub-menu">
-                        <li><a href="index.html">Home 1</a></li>
-                        <li><a href="index-2.html">Home 2</a></li>
-                        <li><a href="index-3.html">Home 3</a></li>
+                       <ul>
+          <li class="menu-item-has-children">
+            <a href="{{ route('home')}}">Home</a>
+          </li>
+
+           <li class="menu-item-has-children">
+            <a href="{{ route('shop') }}">Shop</a>
+          </li>
+          <li class="menu-item-has-children">
+            <a href="{{ route('about')}}">About</a>
+          </li>
+         <li class="menu-item-has-children">
+            <a href="#">Jewellery</a>
+            <ul>
+               
+            </ul>
+
+             <ul class="sub-menu">
+                        @foreach ($categories as $category)
+                    <li><a href="{{ route('category_detail', $category->slug) }}">{{ $category->name }}</a></li>
+                @endforeach
                       </ul>
-                    </li>
-                    <li class="menu-item-has-children">
-                      <a href="about.html">About</a>
-                      <ul class="sub-menu">
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="faq.html">Faq’s</a></li>
-                      </ul>
-                    </li>
-                    <li class="menu-item-has-children">
-                      <a href="shop-sidebar.html">watch</a>
-                    </li>
-                    <li>
-                      <a href="shop.html">jewellery</a>
-                    </li>
-                    <li class="menu-item-has-children mega-menu-wrap">
-                      <a href="javascript:void(0)">Pages</a>
-                      <ul class="mega-menu">
-                        <li><a href="products-grid.html">Page List 1</a>
-                          <ul>
-                            <li><a href="index.html">Home 1</a></li>
-                            <li><a href="index-2.html">Home 2</a></li>
-                            <li><a href="index-3.html">Home 3</a></li>
-                            <li><a href="about.html">About</a></li>
-                            <li><a href="shop-sidebar.html">watch</a></li>
-                          </ul>
-                        </li>
-                        <li><a href="#">Page List 2</a>
-                          <ul>
-                            <li><a href="shop.html">jewellery</a></li>
-                            <li><a href="faq.html">Faq's</a></li>
-                            <li><a href="blog.html">Blog</a></li>
-                            <li><a href="blog-list.html">Blog List</a></li>
-                            <li><a href="blog-details.html">Blog Details</a></li>
-                          </ul>
-                        </li>
-                        <li><a href="#">Page List 3</a>
-                          <ul>
-                            <li><a href="shop.html">Shop</a></li>
-                            <li><a href="shop-sidebar.html">Shop Sidebar</a></li>
-                            <li><a href="shop-details.html">Shop Details</a></li>
-                            <li><a href="cart.html">My Cart</a></li>
-                            <li><a href="checkout.html">Checkout</a></li>
-                          </ul>
-                        </li>
-                        <li><a href="#">Page List 4</a>
-                          <ul>
-                            <li><a href="404.html">404 Error</a></li>
-                            <li><a href="contact.html">Contact Us</a></li>
-                          </ul>
-                        </li>
-                      </ul>
-                    </li>
-                    <li>
-                      <a href="contact.html">Contact</a>
-                    </li>
-                  </ul>
+        </li>
+          <li>
+            <a href="{{ route('contact') }}">Contact</a>
+          </li>
+        </ul>
                 </nav>
                 <button class="vs-menu-toggle d-inline-block d-lg-none"><i class="fal fa-bars"></i></button>
               </div>
               <div class="col-xl-3 col-md-auto col-auto">
                 <div class="header-wc">
-                  <a class="wc-link" href="cart.html">Wishlist
-                    <svg width="20" height="17" viewBox="0 0 20 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M14.5815 0C13.6435 0.0141142 12.726 0.26742 11.9215 0.734338C11.1171 1.20126 10.4543 1.86525 10 2.65927C9.54572 1.86525 8.8829 1.20126 8.07847 0.734338C7.27405 0.26742 6.35651 0.0141142 5.41852 0C3.92324 0.062848 2.51444 0.695644 1.49991 1.76014C0.485388 2.82464 -0.0524034 4.2343 0.00403263 5.68117C0.00403263 9.34531 3.99076 13.3471 7.33441 16.0604C8.08096 16.6673 9.02486 17 10 17C10.9751 17 11.919 16.6673 12.6656 16.0604C16.0092 13.3471 19.996 9.34531 19.996 5.68117C20.0524 4.2343 19.5146 2.82464 18.5001 1.76014C17.4856 0.695644 16.0768 0.062848 14.5815 0ZM11.5952 14.8274C11.1487 15.1912 10.5837 15.3906 10 15.3906C9.41628 15.3906 8.85131 15.1912 8.40481 14.8274C4.12487 11.3535 1.67003 8.02052 1.67003 5.68117C1.61308 4.66155 1.97521 3.66151 2.67742 2.89917C3.37964 2.13682 4.36497 1.67401 5.41852 1.61168C6.47206 1.67401 7.45739 2.13682 8.15961 2.89917C8.86182 3.66151 9.22395 4.66155 9.167 5.68117C9.167 5.89489 9.25477 6.09985 9.41098 6.25098C9.5672 6.4021 9.77908 6.487 10 6.487C10.2209 6.487 10.4328 6.4021 10.589 6.25098C10.7452 6.09985 10.833 5.89489 10.833 5.68117C10.7761 4.66155 11.1382 3.66151 11.8404 2.89917C12.5426 2.13682 13.5279 1.67401 14.5815 1.61168C15.635 1.67401 16.6204 2.13682 17.3226 2.89917C18.0248 3.66151 18.3869 4.66155 18.33 5.68117C18.33 8.02052 15.8751 11.3535 11.5952 14.8242V14.8274Z" fill="currentColor" />
-                    </svg>
-                  </a>
-                  <a class="wc-link" href="cart.html">bag 0
-                    <svg width="18" height="20" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M5.33315 6.33334V3.12501C5.33315 1.75001 6.24982 0.833344 7.62482 0.833344H10.3748C11.7498 0.833344 12.6665 1.75001 12.6665 3.12501V6.33334M16.709 14.6108H5.33315M5.70002 4.95834H12.3C15.4167 4.95834 15.7284 6.41584 15.9392 8.19418L16.7642 15.0692C17.03 17.3242 16.3334 19.1667 13.125 19.1667H4.88419C1.66669 19.1667 0.970022 17.3242 1.24502 15.0692L2.07003 8.19418C2.2717 6.41584 2.58336 4.95834 5.70002 4.95834Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                  </a>
+                  
+                 <a class="wc-link" href="{{ route('cart.index') }}">
+    bag <span id="cart-count">{{ array_sum(array_column(session('cart', []), 'quantity')) }}</span>
+    <svg width="18" height="20" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M5.33315 6.33334V3.12501C5.33315 1.75001 6.24982 0.833344 7.62482 0.833344H10.3748C11.7498 0.833344 12.6665 1.75001 12.6665 3.12501V6.33334M16.709 14.6108H5.33315M5.70002 4.95834H12.3C15.4167 4.95834 15.7284 6.41584 15.9392 8.19418L16.7642 15.0692C17.03 17.3242 16.3334 19.1667 13.125 19.1667H4.88419C1.66669 19.1667 0.970022 17.3242 1.24502 15.0692L2.07003 8.19418C2.2717 6.41584 2.58336 4.95834 5.70002 4.95834Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+</a>
                 </div>
               </div>
             </div>
@@ -498,33 +363,32 @@
     <!--==============================
     Header Area end
 ==============================-->
-    @yield('content')
+    @yield("content")
 
     <!--==============================
         Footer Area
     ==============================-->
-    <footer class="footer-layout2" data-bg-src="{{ asset('assets/img/footer/footer-image-1-1.png ') }}">
+<footer class="footer-layout2" data-bg-src="/assets/img/footer/footer-image-1-1.png">
       <div class="footer-widgets">
         <div class="container">
           <div class="row gy-4 justify-content-between">
             <div class="col-lg-3">
               <div class="footer-logo">
-                <a href="index.html"><img src="{{ asset('assets/img/logo.png') }}" alt="logo"></a>
+                <a href="{{ route('home') }}"><img src="/assets/img/logo.png" alt="logo"></a>
               </div>
               <div class="footer-info style2">
                 <p><span>Address :</span> 966 munich Expressway
                   Sue 700 Germany, TX 7859</p>
               </div>
-              <a href="cart.html"><img src="{{ asset('assets/img/footer/payments.png ') }}" alt="payments"></a>
+              <a href="cart.html"><img src="/assets/img/footer/payments.png" alt="payments"></a>
             </div>
             <div class="col-lg-auto">
               <div class="footer-widget">
                 <h3 class="footer-title">Shopping</h3>
                 <div class="footer-menu2">
-                  <a href="#">Gift card</a>
-                  <a href="#">terms & conditions</a>
-                  <a href="#">privacy policy</a>
-                  <a href="#">delivery</a>
+                  <a href="{{ route('conditionas') }}">terms & conditions</a>
+                  <a href="{{ route('privacy') }}">privacy policy</a>
+                  <a href="{{ route('delivery') }}">delivery</a>
                 </div>
               </div>
             </div>
@@ -532,24 +396,31 @@
               <div class="footer-widget">
                 <h3 class="footer-title">About Store</h3>
                 <div class="footer-menu2">
-                  <a href="#">Shopping</a>
-                  <a href="#">Order Tracking</a>
-                  <a href="#">Privacy Policy</a>
-                  <a href="#">Help</a>
+                  <a href="{{ route('shop') }}">Shopping</a>
+                  <a href="{{ route('track.order.form' )}}">Order Tracking</a>
+                  <a href="{{ route('privacy') }}">Privacy Policy</a>
+                  <a href="{{ route('conditionas') }}">Help</a>
                 </div>
               </div>
             </div>
             <div class="col-lg-auto">
               <div class="footer-widget">
                 <h3 class="footer-title">Subscribe for <span>newsletter</span></h3>
-                <form class="footer-newsletter" action="#">
-                  <input type="email" placeholder="Enter your email">
-                  <button type="submit">
-                    <svg width="20" height="14" viewBox="0 0 20 14" fill="none">
-                      <path d="M12.43 0.930176L18.5 7.00018L12.43 13.0702M1.5 7.00018H18.33" stroke="#F5F1E6" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                  </button>
-                </form>
+               <form class="footer-newsletter" action="{{ route('subscribe') }}" method="POST">
+    @csrf
+    <input type="email" name="email" placeholder="Enter your email" required>
+    <button type="submit">
+        <svg width="20" height="14" viewBox="0 0 20 14" fill="none">
+            <path d="M12.43 0.930176L18.5 7.00018L12.43 13.0702M1.5 7.00018H18.33" stroke="#F5F1E6" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+    </button>
+</form>
+
+@if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
                 <h4 class="footer-title">follow</h4>
                 <div class="social-style">
                   <a class="facebook" href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
@@ -563,8 +434,8 @@
         </div>
       </div>
       <p class="footer-copyright style2">
-        Copyright <i class="fal fa-copyright"></i> 2024 <a href="index.html">Luxrio</a>.
-        All rights reserved by <a href="https://themeforest.net/user/vecuro_themes">Vecuro</a>.
+        Copyright <i class="fal fa-copyright"></i> 2025 <a href="{{ route('home') }}">Mr Nomi</a>.
+        All rights reserved by <a href="https://triatechsol.com/">TriA Tech Solution</a>.
       </p>
     </footer>
     <!--==============================
@@ -582,31 +453,73 @@
         All Js File
     ============================== -->
   <!-- Jquery -->
-  <script src="{{ asset('assets/js/vendor/jquery-3.6.0.min.js') }}"></script>
+  <script src="/assets/js/vendor/jquery-3.6.0.min.js"></script>
   <!-- Jquery UI -->
-  <script src="{{ asset('assets/js/jquery-ui.min.js') }}"></script>
+  <script src="/assets/js/jquery-ui.min.js"></script>
   <!-- Slick Slider -->
-  <script src="{{ asset('assets/js/slick.min.js') }}"></script>
+  <script src="/assets/js/slick.min.js"></script>
   <!-- Bootstrap -->
-  <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
-  <!-- WOW.js') }} Animation -->
-  <script src="{{ asset('assets/js/wow.min.js') }}"></script>
+  <script src="/assets/js/bootstrap.min.js"></script>
+  <!-- WOW.js Animation -->
+  <script src="/assets/js/wow.min.js"></script>
   <!-- Magnific Popup -->
-  <script src="{{ asset('assets/js/jquery.magnific-popup.min.js') }}"></script>
+  <script src="/assets/js/jquery.magnific-popup.min.js"></script>
   <!-- Image Loaded Jquery -->
-  <script src="{{ asset('assets/js/imagesloaded.pkgd.min.js') }}"></script>
+  <script src="/assets/js/imagesloaded.pkgd.min.js"></script>
   <!-- Gsap -->
-  <script src="{{ asset('assets/js/gsap.min.js') }}"></script>
+  <script src="/assets/js/gsap.min.js"></script>
   <!-- ScrollTrigger -->
-  <script src="{{ asset('assets/js/ScrollTrigger.min.js') }}"></script>
+  <script src="/assets/js/ScrollTrigger.min.js"></script>
   <!-- ScrollToPlugin -->
-  <script src="{{ asset('assets/js/ScrollToPlugin.min.js') }}"></script>
+  <script src="/assets/js/ScrollToPlugin.min.js"></script>
   <!-- SplitText -->
-  <script src="{{ asset('assets/js/SplitText.min.js') }}"></script>
+  <script src="/assets/js/SplitText.min.js"></script>
   <!-- Lenis -->
-  <script src="{{ asset('assets/js/bundled-lenis.min.js') }}"></script>
+  <script src="/assets/js/bundled-lenis.min.js"></script>
   <!-- Main Js File -->
-  <script src="{{ asset('assets/js/main.js') }}"></script>
+  <script src="/assets/js/main.js"></script>
+  <script src="/assets/js/cart.js"></script>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+// $(document).ready(function () {
+//     // Check if currency is already selected
+//     var savedCurrency = localStorage.getItem("selectedCurrency");
+//     if (savedCurrency) {
+//         $("#currency-dropdown").val(savedCurrency);
+//         convertPrices(savedCurrency); // Call function to convert prices
+//     }
+
+//     $("#currency-dropdown").change(function () {
+//         var selectedCurrency = $(this).val();
+        
+//         // Save currency selection in localStorage
+//         localStorage.setItem("selectedCurrency", selectedCurrency);
+
+//         convertPrices(selectedCurrency); // Convert prices on selection
+//     });
+
+//     function convertPrices(selectedCurrency) {
+//         $.ajax({
+//             url: "/getExchangeRate/PKR/" + selectedCurrency,
+//             type: "GET",
+//             success: function (response) {
+//                 var exchangeRate = response.exchange_rate;
+
+//                 $(".product-price__number").each(function () {
+//                     var originalPrice = $(this).data("price");
+//                     var convertedPrice = (originalPrice * exchangeRate).toFixed(2);
+//                     $(this).text(selectedCurrency + " " + convertedPrice);
+//                 });
+//             },
+//             error: function () {
+//                 alert("Error fetching exchange rate!");
+//             }
+//         });
+//     }
+// });
+</script>
+
 </body>
 
 </html>

@@ -127,36 +127,17 @@ class ProductController extends Controller
         return redirect()->route('product')->with('success', 'product Deleted!');
     }
 
-     public function updateStatus(Request $request, $id)
-     {
+    public function updateStatus(Request $request, $id)
+    {
         $product = Product::findOrFail($id);
         $product->update([
             'status' => $request->status
         ]);
 
         return response()->json(['success' => true, 'message' => 'Status updated successfully']);
-     }
-
-     public function check($id)
-     {
-          $product = Product::find($id);
-
-    // Agar product nahi mila to error return karo
-    if (!$product) {
-        return "Product nahi mila! ID: " . $id;
     }
 
-    $delivers = $product->countries()->where('name', 'Pakistan')->exists();
-
-    if ($delivers) {
-        return "Ye product Pakistan me deliver ho sakta hai.";
-    } else {
-        return "Ye product Pakistan me deliver nahi ho sakta.";
-    }
-
-     }
-
-
+   
     public function CreateVaration()
     {
         return view('admin.product-varation.create');

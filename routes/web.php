@@ -5,7 +5,11 @@ use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\MediaController;
 use App\Http\Controllers\admin\DealsController;
-
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\CurrencyController;
+use App\Http\Controllers\NewsletterController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,14 +24,42 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Home Route
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/about-us', [HomeController::class, 'about'])->name('about');
+Route::get('/contact-us', [HomeController::class, 'contact'])->name('contact');
+Route::get('/shop', [HomeController::class, 'shop'])->name('shop');
+Route::get('/privacy-policy', [HomeController::class, 'privacy'])->name('privacy');
+Route::get('/delivery-policy', [HomeController::class, 'delivery'])->name('delivery');
+Route::get('/terms-conditionas', [HomeController::class, 'conditionas'])->name('conditionas');
+Route::get('/category/{slug}/', [HomeController::class, 'category_detail'])->name('category_detail');
+Route::get('product/{slug}/', [HomeController::class, 'product_detail'])->name('detail');
+
+// Review Route
+Route::Post('/submit/review/', [ReviewController::class, 'add_review'])->name('add.review');
+
+// Add To Cart Route
+Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('add.to.cart');
+Route::get('/my-cart', [CartController::class, 'index'])->name('cart.index');
+Route::post('/cart/update', [CartController::class, 'updateCart'])->name('cart.update');
+Route::post('/apply-coupon', [CartController::class, 'applyCoupon'])->name('coupon.apply');
+Route::get('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
+Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout');
+Route::POST('/checkout', [CartController::class, 'order_submit'])->name('place.order');
+Route::get('/get-cities', [CartController::class, 'getCities'])->name('get.cities');
+Route::get('/admin/product/check/{id}', [CartController::class, 'check'])->name('product.check');
+Route::get('/get-delivery-charge', [CartController::class, 'getDeliveryCharge'])->name('get.delivery.charge');
+// Route::get('/getExchangeRate/{from}/{to}', [CurrencyController::class, 'convertCurrency']);
+Route::get('/track-order', [CartController::class, 'showTrackOrderForm'])->name('track.order.form');
+Route::post('/track-order', [CartController::class, 'trackOrder'])->name('track.order');
+Route::post('/subscribe', [NewsletterController::class, 'subscribe'])->name('subscribe');
+
+
+
 
 // Dashboard Route - Requires Authentication and Email Verification
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified'])->name('admin.dashboard');
 
 // Profile Routes - These routes are protected with auth middleware
 Route::middleware('auth')->group(function () {
@@ -53,8 +85,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/product/update/{id}', [ProductController::class, 'update'])->name('product.update');
     Route::post('/admin/product/update-status/{id}', [ProductController::class, 'updateStatus']); // Status update route for product
     Route::delete('/admin/product/destroy/{id}', [ProductController::class, 'destroy'])->name('product.destroy'); // Delete product 
-    Route::get('/admin/product/check/{id}', [ProductController::class, 'check'])->name('product.check');
-
+    
 
     // Variation Routes - Admin Panel Routes for Product Variation Management
     Route::get('/admin/varation/create', [ProductController::class, 'CreateVaration'])->name('varartion.create'); // Create variation
@@ -68,6 +99,17 @@ Route::middleware('auth')->group(function () {
     Route::put('/media/update/{id}', [MediaController::class, 'update'])->name('media.update');
     Route::post('/admin/media/update-status/{id}', [MediaController::class, 'updateStatus']); // Status update route for media
     Route::delete('/admin/media/destroy/{id}', [MediaController::class, 'destroy'])->name('media.destroy'); // Delete media route
+
+    // Review Routes - Admin Panel Routes for Review Management
+    Route::get('/admin/product/review', [ReviewController::class, 'view_review'])->name('view.review');
+    Route::Put('/product/review/update/{id}/', [ReviewController::class, 'review_update'])->name('update.review');
+
+
+    // Review Routes - Admin Panel Routes for Review Management
+    Route::get('/admin/view/order', [CartController::class, 'view_order'])->name('view.order');
+    Route::get('/admin/order/detail/{id}', [CartController::class, 'viewOrderDetail'])->name('view.detail');
+    Route::Put('/admin/view/order/{id}/', [CartController::class, 'order_status_update'])->name('order.status_update');
+    Route::post('/update-order-status', [CartController::class, 'updateStatus'])->name('update.order.status');
 
 
     // Deals Routes - Admin Panel Routes for Deals Management

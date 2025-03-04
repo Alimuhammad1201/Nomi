@@ -36,6 +36,11 @@ class Product extends Model
     {
       return $this->belongsToMany(Country::class, 'product_countries');
     }
+     
+    public function review()
+    {
+        return $this->hasMany(Review::class);
+    }
     protected static function boot()
     {
         parent::boot();
